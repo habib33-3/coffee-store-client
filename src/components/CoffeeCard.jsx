@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
@@ -31,6 +32,7 @@ const CoffeeCard = ({ coffee }) => {
     });
   };
 
+  
   return (
     <div>
       <div className="card card-side bg-base-100 shadow-xl">
@@ -51,7 +53,9 @@ const CoffeeCard = ({ coffee }) => {
             <div className="card-actions justify-end">
               <div className="btn-group btn-group-vertical space-y-1">
                 <button className="btn ">View</button>
-                <button className="btn">Update</button>
+                <Link to={`/updatedCoffee/${_id}`}>
+                  <button  className="btn">Update</button>
+                </Link>
                 <button
                   onClick={() => handleDelete(_id)}
                   className="btn btn-error"
