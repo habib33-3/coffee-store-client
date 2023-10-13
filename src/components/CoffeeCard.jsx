@@ -1,6 +1,35 @@
+import Swal from "sweetalert2";
+
 /* eslint-disable react/prop-types */
 const CoffeeCard = ({ coffee }) => {
-  const { name, quantity, supplier, taste, category, details, photo } = coffee;
+  const { _id, name, quantity, supplier, taste, category, details, photo } =
+    coffee;
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/coffee/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -23,7 +52,12 @@ const CoffeeCard = ({ coffee }) => {
               <div className="btn-group btn-group-vertical space-y-1">
                 <button className="btn ">View</button>
                 <button className="btn">Update</button>
-                <button className="btn">X</button>
+                <button
+                  onClick={() => handleDelete(_id)}
+                  className="btn btn-error"
+                >
+                  X
+                </button>
               </div>
             </div>
           </div>
