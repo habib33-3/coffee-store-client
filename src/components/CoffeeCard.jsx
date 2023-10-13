@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, quantity, supplier, taste, category, details, photo } =
     coffee;
 
@@ -26,13 +26,14 @@ const CoffeeCard = ({ coffee }) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const remaining = coffees.filter((cof) => cof._id !== id);
+              setCoffees(remaining);
             }
           });
       }
     });
   };
 
-  
   return (
     <div>
       <div className="card card-side bg-base-100 shadow-xl">
@@ -54,7 +55,7 @@ const CoffeeCard = ({ coffee }) => {
               <div className="btn-group btn-group-vertical space-y-1">
                 <button className="btn ">View</button>
                 <Link to={`/updatedCoffee/${_id}`}>
-                  <button  className="btn">Update</button>
+                  <button className="btn">Update</button>
                 </Link>
                 <button
                   onClick={() => handleDelete(_id)}
