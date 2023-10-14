@@ -5,6 +5,9 @@ import "./index.css";
 import App from "./App";
 import AddCoffee from "./components/AddCoffee";
 import UpdateCoffee from "./components/UpdateCoffee";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import AuthProviders from "./providers/AuthProviders";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +26,22 @@ const router = createBrowserRouter([
     element: <UpdateCoffee />,
     loader: ({ params }) => fetch(`http://localhost:3000/coffee/${params.id}`),
   },
+
+  {
+    path: "/login",
+    element: <SignIn />,
+  },
+
+  {
+    path: "/register",
+    element: <SignUp />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProviders>
+      <RouterProvider router={router} />
+    </AuthProviders>
   </React.StrictMode>
 );
