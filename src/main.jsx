@@ -19,9 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App />,
-        loader: () => fetch(`http://localhost:3000/coffee`),
+        loader: () =>
+          fetch(`https://coffee-store-server-gilt.vercel.app/coffee`),
       },
-      
+
       {
         path: "/addCoffee",
         element: <AddCoffee />,
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
         path: "/updatedCoffee/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/coffee/${params.id}`),
+          fetch(
+            `https://coffee-store-server-gilt.vercel.app/coffee/${params.id}`
+          ),
       },
 
       {
@@ -47,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users />,
-        loader: () => fetch("http://localhost:3000/user"),
+        loader: () => fetch("https://coffee-store-server-gilt.vercel.app/user"),
       },
     ],
   },

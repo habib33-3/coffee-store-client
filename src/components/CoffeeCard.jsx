@@ -18,7 +18,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://coffee-store-server-gilt.vercel.app/${id}`, {
+        fetch(`https://coffee-store-server-gilt.vercel.app/coffee/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
