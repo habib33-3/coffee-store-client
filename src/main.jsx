@@ -8,33 +8,48 @@ import UpdateCoffee from "./components/UpdateCoffee";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import AuthProviders from "./providers/AuthProviders";
+import Users from "./components/Users";
+import Layout from "./components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    loader: () => fetch(`http://localhost:3000/coffee`),
-  },
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+        loader: () => fetch(`http://localhost:3000/coffee`),
+      },
+      
+      {
+        path: "/addCoffee",
+        element: <AddCoffee />,
+      },
 
-  {
-    path: "/addCoffee",
-    element: <AddCoffee />,
-  },
+      {
+        path: "/updatedCoffee/:id",
+        element: <UpdateCoffee />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/coffee/${params.id}`),
+      },
 
-  {
-    path: "/updatedCoffee/:id",
-    element: <UpdateCoffee />,
-    loader: ({ params }) => fetch(`http://localhost:3000/coffee/${params.id}`),
-  },
+      {
+        path: "/login",
+        element: <SignIn />,
+      },
 
-  {
-    path: "/login",
-    element: <SignIn />,
-  },
+      {
+        path: "/register",
+        element: <SignUp />,
+      },
 
-  {
-    path: "/register",
-    element: <SignUp />,
+      {
+        path: "/users",
+        element: <Users />,
+        loader: () => fetch("http://localhost:3000/user"),
+      },
+    ],
   },
 ]);
 
