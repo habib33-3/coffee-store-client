@@ -25,7 +25,7 @@ const AddCoffee = () => {
     };
     console.log(newCoffee);
 
-    fetch("http://localhost:3000/coffee", {
+    fetch("https://coffee-store-server-gilt.vercel.app/coffee", {
       method: "POST",
       headers: {
         "content-type": "application/json",

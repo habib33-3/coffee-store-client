@@ -29,7 +29,7 @@ const UpdateCoffee = () => {
       details,
       photo,
     };
-    fetch(`http://localhost:3000/coffee/${_id}`, {
+    fetch(`https://coffee-store-server-gilt.vercel.app/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
